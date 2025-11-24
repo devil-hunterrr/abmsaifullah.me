@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Under Maintenance — abmsaifullah.me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#03040a;
+      --green:#39ff14;
+      --muted:#6b6b6b;
+      --glass: rgba(255,255,255,0.02);
+    }
+    html,body{height:100%;}
+    body{
+      margin:0; font-family: 'Inconsolata', monospace; background: radial-gradient(ellipse at center, #071018 0%, var(--bg) 60%);
+      color:var(--green); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+    }
+
+    /* subtle scanlines */
+    .scanlines{
+      position:fixed; inset:0; pointer-events:none; background-image:linear-gradient(transparent 90%, rgba(0,0,0,0.12) 100%);
+      background-size:100% 3px; mix-blend-mode:overlay; opacity:0.35;
+    }
+
+    /* container */
+    .terminal-wrap{
+      width:min(980px,94%); max-width:1200px; border-radius:8px; padding:28px; box-sizing:border-box;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+      border:1px solid rgba(57,255,20,0.06);
+      backdrop-filter: blur(4px);
+    }
+
+    .titlebar{display:flex; align-items:center; gap:12px; margin-bottom:14px}
+    .dots{display:flex; gap:8px}
+    .dot{width:12px;height:12px;border-radius:50%; box-shadow:0 1px 0 rgba(0,0,0,0.6)}
+    .dot.red{background:linear-gradient(#ff5f56,#bf3b2b)}
+    .dot.yellow{background:linear-gradient(#ffbd2e,#bf8c21)}
+    .dot.green{background:linear-gradient(#27c93f,#198f2b)}
+
+    .terminal{
+      background:transparent; color:var(--green); font-size:16px; line-height:1.5; min-height:360px; position:relative; padding:14px 12px; border-radius:6px;
+    }
+
+    .prompt{opacity:0.9}
+    .muted{color:var(--muted);}
+
+    /* typing effect */
+    .line{white-space:pre-wrap; overflow-wrap:break-word}
+    .cursor{
+      display:inline-block; width:10px; height:20px; background:var(--green); margin-left:6px; vertical-align:middle; animation:blink 1s steps(2,start) infinite;
+    }
+    @keyframes blink{50%{opacity:0}} 
+
+    /* matrix / noise effect */
+    .bg-noise{position:fixed; inset:0; pointer-events:none; mix-blend-mode:screen; opacity:0.06; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><rect width="120" height="120" fill="black"/><g fill="white" font-family="monospace" font-size="10"><text x="4" y="12">010101</text><text x="60" y="40">101010</text><text x="10" y="90">110011</text></g></svg>');}
+
+    /* footer */
+    footer{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:18px; color:var(--muted); font-size:13px}
+    .social{display:flex; gap:10px; align-items:center}
+    .social a{display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--green); opacity:0.95}
+    .social a .label{font-size:13px; color:var(--muted)}
+
+    /* instagram icon */
+    .ig{width:36px;height:36px;display:inline-grid;place-items:center;border-radius:8px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(57,255,20,0.06)}
+    .ig svg{filter:drop-shadow(0 1px 0 rgba(0,0,0,0.6))}
+
+    /* responsive */
+    @media (max-width:520px){ .terminal{font-size:14px} }
+
+  </style>
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="bg-noise"></div>
+
+  <main class="terminal-wrap" role="main" aria-labelledby="heading">
+    <div class="titlebar" aria-hidden>
+      <div class="dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <div class="muted">abmsaifullah.me — system console</div>
+    </div>
+
+    <section class="terminal" aria-live="polite">
+      <div class="line muted">Connecting to remote host: <span class="prompt">abmsaifullah.me</span></div>
+      <div class="line">Establishing secure channel...</div>
+      <div class="line">Negotiating TLS handshake... <span class="muted">OK</span></div>
+      <div class="line" id="type-target" style="margin-top:18px; font-weight:700; font-size:20px"></div>
+      <div class="line" style="margin-top:10px">Status: <span class="muted">503 Service Unavailable</span></div>
+      <div class="line muted" style="margin-top:4px">Estimated downtime: unknown — check back later.</div>
+
+      <div style="height:18px"></div>
+      <div class="muted">Logs (latest):</div>
+      <div class="line muted" style="font-size:13px; margin-top:8px">[00:01:23] ▶ patcher: update config.json — failed (permission denied)</div>
+      <div class="line muted" style="font-size:13px">[00:01:31] ▶ watchdog: restarting webserver — ok</div>
+      <div class="line muted" style="font-size:13px">[00:02:02] ▶ deploy: rolling back to safe release</div>
+
+    </section>
+
+    <footer>
+      <div class="muted">&copy; <span id="year"></span> abmsaifullah.me — maintenance mode</div>
+      <div class="social">
+        <a id="insta-link" class="ig" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <!-- Instagram glyph (single-color) -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.4"></rect>
+            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.4"></circle>
+            <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle>
+          </svg>
+        </a>
+        <a class="label muted" href="#" id="alt-link" target="_blank" rel="noopener noreferrer">instagram/yourhandle</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // === CUSTOMIZE THIS ===
+    // Replace the link below with your Instagram profile or custom link.
+    const instaLink = 'https://instagram.com/yourhandle';
+    const altLabel = 'instagram/yourhandle';
+    // ======================
+
+    document.getElementById('insta-link').href = instaLink;
+    document.getElementById('alt-link').href = instaLink;
+    document.getElementById('alt-link').textContent = altLabel;
+
+    // Fill year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Typing effect for the main message (careful: keep text short for accessibility)
+    const message = 'THIS WEBSITE IS UNDER MAINTENANCE';
+    const target = document.getElementById('type-target');
+    const cursor = document.createElement('span'); cursor.className = 'cursor';
+    let i = 0;
+
+    function typeNext(){
+      if(i <= message.length){
+        target.textContent = message.slice(0,i);
+        if(!target.contains(cursor)) target.appendChild(cursor);
+        i++;
+        // variable speed for natural effect
+        setTimeout(typeNext, 35 + Math.random()*60);
+      } else {
+        // after typing complete, keep cursor blinking and occasionally shuffle a small 'hacker' animation
+        setInterval(()=>{
+          // random flicker subtitle
+          const flick = ['System check...','Awaiting admin approval','Rebuilding assets','Syncing databases'][Math.floor(Math.random()*4)];
+          // show flicker in small muted line
+          let flickerLine = document.querySelector('.terminal .flicker');
+          if(!flickerLine){
+            flickerLine = document.createElement('div'); flickerLine.className='line muted flicker';
+            flickerLine.style.marginTop='10px';
+            document.querySelector('.terminal').appendChild(flickerLine);
+          }
+          flickerLine.textContent = flick;
+        }, 4200);
+      }
+    }
+    typeNext();
+
+    // small keyboard shortcut: press 'r' to simulate retry (nice for demo)
+    window.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase() === 'r'){
+        const l = document.createElement('div'); l.className='line'; l.textContent='> attempting reconnect...';
+        document.querySelector('.terminal').appendChild(l);
+        setTimeout(()=>{ l.textContent='> reconnect failed — auth token missing'; l.className='line muted'; }, 1200);
+      }
+    });
+  </script>
+</body>
+</html>
