@@ -1,264 +1,283 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CYBERPUNK SYSTEM — MAINTENANCE</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maintenance</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- Three.js -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<style>
+:root{
+  --text:#e6e8f2;
+  --muted:#b0b5c9;
+  --accent:#8edb8e;
+}
 
-  <style>
-    :root{
-      --neon-pink:#8b0000; /* dark red */
-      --neon-cyan:#00f7ff;
-      --neon-green:#39ff14;
-      --bg:#02020a;
-      --panel:rgba(8,10,22,0.82);
-      --border:rgba(0,247,255,0.35);
-      --muted:#7a7f9d;
-    }
+/* ===== BODY ===== */
+body{
+  margin:0;
+  font-family:'Inter', sans-serif;
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+  background:
+    linear-gradient(rgba(15,18,32,0.75), rgba(15,18,32,0.9)),
+    url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop');
 
-    body{
-      margin:0;
-      background:radial-gradient(circle at top, #0a0f2a, var(--bg) 65%);
-      font-family:'Inconsolata', monospace;
-      color:var(--neon-green);
-      overflow:hidden;
-    }
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
 
-    /* ===== 3D CANVAS ===== */
-    #scene{position:fixed; inset:0; z-index:0}
+  color:var(--text);
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
 
-    /* ===== UI ===== */
-    .ui{
-      position:relative;
-      z-index:3;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      perspective:1400px;
-    }
+/* LIGHT RAYS */
+.light-rays{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:0.25;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,200,0.25), transparent 40%),
+    linear-gradient(120deg, transparent 30%, rgba(255,255,200,0.15), transparent 70%);
+  animation:rays 12s ease-in-out infinite;
+}
+@keyframes rays{
+  50%{transform:translateX(20px)}
+}
 
-    .terminal{
-      width:min(1000px,94%);
-      padding:28px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.8)), var(--panel);
-      border:1px solid var(--border);
-      border-radius:14px;
-      box-shadow:
-        0 0 0 rgba(0,0,0,0),
-        0 0 0 rgba(0,0,0,0),
-        0 80px 180px rgba(0,0,0,0.95);
-      transform-style:preserve-3d;
-      animation:float 7s ease-in-out infinite;
-    }
+/* FOG */
+.fog{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  opacity:0.15;
+  background:radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+}
 
-    @keyframes float{
-      0%,100%{transform:rotateX(0deg) rotateY(0deg) translateZ(0)}
-      50%{transform:rotateX(3deg) rotateY(-3deg) translateZ(30px)}
-    }
+/* RAIN */
+#rain{
+  position:fixed;
+  inset:0;
+  z-index:2;
+  opacity:0.25;
+}
 
-    .title{
-      font-family:'Orbitron', sans-serif;
-      font-weight:800;
-      letter-spacing:2px;
-      font-size:14px;
-      color:var(--neon-cyan);
-      text-shadow:0 0 0 rgba(0,0,0,0), 0 0 18px rgba(0,0,0,0.95);
-      margin-bottom:18px;
-    }
+/* GRASS */
+.grass{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:120px;
+  z-index:2;
+  opacity:0.15;
+}
 
-    .line{margin:4px 0}
-    .muted{color:var(--muted)}
+/* UI */
+.container{
+  position:relative;
+  z-index:3;
+  width:min(900px,92%);
+  padding:40px 28px;
+  text-align:center;
 
-    .headline{
-      margin:22px 0 14px;
-      font-family:'Orbitron', sans-serif;
-      font-size:26px;
-      font-weight:800;
-      letter-spacing:3px;
-      color:var(--neon-pink);
-      text-shadow:0 0 0 rgba(0,0,0,0), 0 0 18px rgba(0,0,0,0.95);
-    }
+  background:rgba(20,25,35,0.6);
+  backdrop-filter:blur(10px);
 
-    .cursor{
-      display:inline-block;
-      width:12px;
-      height:22px;
-      background:var(--neon-pink);
-      margin-left:6px;
-      animation:blink 1s steps(2,start) infinite;
-      box-shadow:0 0 12px rgba(255,47,220,0.9);
-    }
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
 
-    @keyframes blink{50%{opacity:0}}
+  animation:float 8s ease-in-out infinite;
+}
+@keyframes float{
+  50%{transform:translateY(-6px)}
+}
 
-    footer{
-      margin-top:26px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:13px;
-      color:var(--muted);
-    }
+h1{
+  font-family:'Orbitron', sans-serif;
+  font-size:28px;
+}
 
-    .social a{
-      width:42px;
-      height:42px;
-      border-radius:10px;
-      display:grid;
-      place-items:center;
-      border:1px solid var(--border);
-      color:var(--neon-cyan);
-      text-decoration:none;
-      box-shadow:0 0 18px rgba(0,0,0,0.9);
-    }
+p{
+  color:var(--muted);
+}
 
-    /* CRT scanlines */
-    .scanlines{
-      position:fixed;
-      inset:0;
-      background:linear-gradient(transparent 92%, rgba(0,0,0,0.35));
-      background-size:100% 3px;
-      pointer-events:none;
-      z-index:4;
-      opacity:0.4;
-    }
+.status{
+  margin-top:20px;
+  color:var(--muted);
+}
 
-    /* Glitch overlay */
-    .glitch{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:2;
-      animation:glitch 6s infinite;
-    }
+.dot{
+  width:8px;
+  height:8px;
+  background:var(--accent);
+  border-radius:50%;
+  display:inline-block;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  50%{opacity:1}
+}
 
-    @keyframes glitch{
-      0%,92%,100%{opacity:0}
-      93%{opacity:0.15}
-      94%{opacity:0}
-      95%{opacity:0.25}
-      96%{opacity:0}
-    }
+/* SOUND BUTTON */
+#soundToggle{
+  margin-top:20px;
+  padding:8px 16px;
+  border:none;
+  border-radius:8px;
+  background:rgba(255,255,255,0.1);
+  color:#fff;
+  cursor:pointer;
+  font-size:13px;
+}
 
-    @media(max-width:600px){
-      .headline{font-size:20px}
-      .terminal{padding:20px}
-    }
-  </style>
+footer{
+  margin-top:30px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+a{color:var(--accent);text-decoration:none;}
+
+</style>
 </head>
+
 <body>
 
-  <canvas id="scene"></canvas>
+<div class="light-rays"></div>
+<div class="fog"></div>
+<canvas id="rain"></canvas>
 
-  <div class="ui">
-    <main class="terminal">
+<!-- GRASS -->
+<svg class="grass" viewBox="0 0 1200 200">
+  <path id="grassPath"
+    d="M0,200 C200,140 400,180 600,150 C800,120 1000,170 1200,140 L1200,200 Z"
+    fill="#6fbf73"/>
+</svg>
 
-      <div class="title">NEURAL INTERFACE :: RESTRICTED</div>
+<!-- AUDIO -->
+<audio id="jungleAudio" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5f6b5f1b3f.mp3?filename=jungle-night-ambience-110624.mp3" type="audio/mpeg">
+</audio>
 
-      <div class="line muted">Initializing cybernet uplink…</div>
-      <div class="line muted">Biometric hash verified</div>
-      <div class="line muted">Access level: <span style="color:var(--neon-cyan)">OBSERVER</span></div>
+<!-- UI -->
+<div class="container">
+  <h1>Website Under Maintenance</h1>
+  <p>We’re upgrading the system. It will be back shortly.</p>
 
-      <div class="headline" id="typing"></div>
-
-      <div class="line muted">Status: 503 — SYSTEM OFFLINE</div>
-      <div class="line muted">Neural grid undergoing reconstruction</div>
-
-      <footer>
-        <div>&copy; <span id="year"></span> abmsaifullah.me</div>
-        <div class="social">
-          <a id="insta" href="#" target="_blank" aria-label="Instagram">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6" />
-              <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-            </svg>
-          </a>
-        </div>
-      </footer>
-
-    </main>
+  <div class="status">
+    <span class="dot"></span> System Updating...
   </div>
 
-  <div class="glitch"></div>
-  <div class="scanlines"></div>
+  <button id="soundToggle">🔇 Play Sound</button>
 
-  <script>
-    /* ===== LINKS ===== */
-    document.getElementById('insta').href = 'https://www.instagram.com/abm_saifullah_/';
+  <footer>
+    © <span id="year"></span> abmsaifullah.me <br>
+    <a href="https://www.instagram.com/abm_saifullah_/" target="_blank">Instagram</a>
+  </footer>
+</div>
 
-    /* ===== YEAR ===== */
-    document.getElementById('year').textContent = new Date().getFullYear();
+<script>
+/* YEAR */
+document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* ===== TYPING ===== */
-    const msg = 'THIS WEBSITE IS UNDER MAINTENANCE';
-    const target = document.getElementById('typing');
-    const cursor = document.createElement('span');
-    cursor.className = 'cursor';
-    let i = 0;
-    function type(){
-      if(i <= msg.length){
-        target.textContent = msg.slice(0,i);
-        if(!target.contains(cursor)) target.appendChild(cursor);
-        i++;
-        setTimeout(type, 50);
-      }
+/* RAIN */
+const canvas = document.getElementById('rain');
+const ctx = canvas.getContext('2d');
+let w,h;
+
+function resize(){
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+let drops=[];
+for(let i=0;i<80;i++){
+  drops.push({
+    x:Math.random()*w,
+    y:Math.random()*h,
+    l:Math.random()*20+10,
+    ys:Math.random()*10+10
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle="rgba(180,220,255,0.5)";
+  for(let d of drops){
+    ctx.beginPath();
+    ctx.moveTo(d.x,d.y);
+    ctx.lineTo(d.x,d.y+d.l);
+    ctx.stroke();
+  }
+}
+
+function update(){
+  for(let d of drops){
+    d.y+=d.ys;
+    if(d.y>h){
+      d.y=-20;
+      d.x=Math.random()*w;
     }
-    type();
+  }
+}
 
-    /* ===== THREE.JS CYBERPUNK SCENE ===== */
-    const canvas = document.getElementById('scene');
-    const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x02020a, 80, 300);
+function rain(){
+  draw();
+  update();
+  requestAnimationFrame(rain);
+}
+rain();
 
-    const camera = new THREE.PerspectiveCamera(65, window.innerWidth/window.innerHeight, 1, 1000);
-    camera.position.z = 140;
+/* GRASS */
+const grass = document.getElementById('grassPath');
+let t=0;
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+function animateGrass(){
+  t+=0.01;
+  let wv=Math.sin(t)*15;
 
-    // Neon grid floor
-    const grid = new THREE.GridHelper(600, 80, 0x00f7ff, 0x00f7ff);
-    grid.material.opacity = 0.15;
-    grid.material.transparent = true;
-    grid.position.y = -40;
-    scene.add(grid);
+  grass.setAttribute("d",
+    `M0,200 C200,${140+wv} 400,${180-wv} 600,${150+wv}
+     C800,${120-wv} 1000,${170+wv} 1200,${140-wv} L1200,200 Z`
+  );
 
-    // Particles
-    const geo = new THREE.BufferGeometry();
-    const count = 3000;
-    const pos = new Float32Array(count*3);
-    for(let i=0;i<count*3;i++) pos[i] = (Math.random()-0.5)*500;
-    geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
-    const mat = new THREE.PointsMaterial({color:0x8b0000, size:1.3, transparent:true, opacity:0.7});
-    const particles = new THREE.Points(geo, mat);
-    scene.add(particles);
+  requestAnimationFrame(animateGrass);
+}
+animateGrass();
 
-    function animate(){
-      requestAnimationFrame(animate);
-      grid.rotation.z += 0.0006;
-      particles.rotation.y += 0.0009;
-      particles.rotation.x += 0.0003;
-      renderer.render(scene, camera);
-    }
-    animate();
+/* AUDIO CONTROL */
+const audio = document.getElementById('jungleAudio');
+const btn = document.getElementById('soundToggle');
 
-    window.addEventListener('resize', ()=>{
-      camera.aspect = window.innerWidth/window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  </script>
+btn.addEventListener('click', ()=>{
+  if(audio.paused){
+    audio.volume = 0.4;
+    audio.play();
+    btn.innerText = "🔊 Sound On";
+  } else {
+    audio.pause();
+    btn.innerText = "🔇 Muted";
+  }
+});
+
+/* AUTOPLAY ON FIRST CLICK */
+document.addEventListener('click', ()=>{
+  if(audio.paused){
+    audio.volume = 0.4;
+    audio.play().catch(()=>{});
+    btn.innerText = "🔊 Sound On";
+  }
+},{once:true});
+</script>
+
 </body>
 </html>
