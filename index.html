@@ -3,280 +3,660 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Maintenance</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<title>System Maintenance</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
-  --text:#e6e8f2;
-  --muted:#b0b5c9;
-  --accent:#8edb8e;
+  --bg:#07090f;
+  --card:#121722;
+  --text:#f2f5ff;
+  --muted:#9ba3b7;
+  --line:rgba(255,255,255,0.08);
+  --accent:#f6b93b;
+  --accent2:#7effc5;
 }
 
-/* ===== BODY ===== */
-body{
+*{
   margin:0;
-  font-family:'Inter', sans-serif;
+  padding:0;
+  box-sizing:border-box;
+}
 
-  background:
-    linear-gradient(rgba(15,18,32,0.75), rgba(15,18,32,0.9)),
-    url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop');
-
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
-
-  color:var(--text);
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+html,body{
+  width:100%;
+  height:100%;
   overflow:hidden;
 }
 
-/* LIGHT RAYS */
-.light-rays{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  opacity:0.25;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,200,0.25), transparent 40%),
-    linear-gradient(120deg, transparent 30%, rgba(255,255,200,0.15), transparent 70%);
-  animation:rays 12s ease-in-out infinite;
-}
-@keyframes rays{
-  50%{transform:translateX(20px)}
+body{
+  font-family:'Inter',sans-serif;
+  background:#05070d;
+  color:var(--text);
+  position:relative;
 }
 
-/* FOG */
+/* =========================
+BACKGROUND IMAGE
+========================= */
+
+.bg{
+  position:fixed;
+  inset:0;
+
+  background:
+  linear-gradient(rgba(5,8,15,0.78), rgba(5,8,15,0.94)),
+  url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop');
+
+  background-size:cover;
+  background-position:center;
+  transform:scale(1.05);
+
+  animation:bgFloat 20s ease-in-out infinite;
+}
+
+@keyframes bgFloat{
+  50%{
+    transform:scale(1.1) translateY(-10px);
+  }
+}
+
+/* =========================
+NOISE
+========================= */
+
+.noise{
+  position:fixed;
+  inset:0;
+  opacity:0.05;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  pointer-events:none;
+  z-index:2;
+}
+
+/* =========================
+FOG
+========================= */
+
 .fog{
   position:fixed;
   inset:0;
   z-index:1;
-  opacity:0.15;
-  background:radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+  pointer-events:none;
+  background:
+  radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08), transparent 30%),
+  radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06), transparent 35%);
+  filter:blur(30px);
+  animation:fogMove 15s linear infinite alternate;
 }
 
-/* RAIN */
+@keyframes fogMove{
+  from{
+    transform:translateX(-20px);
+  }
+  to{
+    transform:translateX(20px);
+  }
+}
+
+/* =========================
+GLOW
+========================= */
+
+.glow{
+  position:fixed;
+  width:700px;
+  height:700px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(246,185,59,0.18), transparent 70%);
+  top:-250px;
+  right:-150px;
+  z-index:1;
+  filter:blur(40px);
+}
+
+/* =========================
+RAIN
+========================= */
+
 #rain{
   position:fixed;
   inset:0;
-  z-index:2;
-  opacity:0.25;
-}
-
-/* GRASS */
-.grass{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  height:120px;
-  z-index:2;
-  opacity:0.15;
-}
-
-/* UI */
-.container{
-  position:relative;
   z-index:3;
-  width:min(900px,92%);
-  padding:40px 28px;
-  text-align:center;
-
-  background:rgba(20,25,35,0.6);
-  backdrop-filter:blur(10px);
-
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,0.08);
-  box-shadow:0 20px 60px rgba(0,0,0,0.6);
-
-  animation:float 8s ease-in-out infinite;
+  opacity:0.18;
 }
-@keyframes float{
-  50%{transform:translateY(-6px)}
+
+/* =========================
+CONTENT
+========================= */
+
+.wrapper{
+  position:relative;
+  z-index:10;
+
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:40px;
+}
+
+.hero{
+  width:min(1150px,100%);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+/* =========================
+LEFT
+========================= */
+
+.left{
+  animation:fadeUp 1s ease;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:10px 16px;
+
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.03);
+
+  border-radius:100px;
+
+  backdrop-filter:blur(20px);
+
+  margin-bottom:25px;
+
+  font-size:13px;
+  color:#d7dff7;
+}
+
+.pulse{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#7effc5;
+  box-shadow:0 0 15px #7effc5;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  50%{
+    opacity:0.3;
+    transform:scale(1.4);
+  }
 }
 
 h1{
-  font-family:'Orbitron', sans-serif;
-  font-size:28px;
+  font-family:'Space Grotesk',sans-serif;
+
+  font-size:72px;
+  line-height:1;
+
+  letter-spacing:-3px;
+
+  margin-bottom:22px;
+}
+
+.gradient{
+  background:linear-gradient(90deg,#ffffff,#f6b93b);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 p{
+  font-size:18px;
+  line-height:1.8;
   color:var(--muted);
+
+  max-width:580px;
+
+  margin-bottom:35px;
 }
 
-.status{
-  margin-top:20px;
-  color:var(--muted);
+/* =========================
+BUTTONS
+========================= */
+
+.buttons{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
 }
 
-.dot{
-  width:8px;
-  height:8px;
-  background:var(--accent);
-  border-radius:50%;
-  display:inline-block;
-  animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-  50%{opacity:1}
-}
-
-/* SOUND BUTTON */
-#soundToggle{
-  margin-top:20px;
-  padding:8px 16px;
+.btn{
+  padding:15px 24px;
+  border-radius:14px;
   border:none;
-  border-radius:8px;
-  background:rgba(255,255,255,0.1);
-  color:#fff;
+
   cursor:pointer;
+
+  font-size:15px;
+  font-weight:600;
+
+  transition:0.35s;
+}
+
+.primary{
+  background:linear-gradient(135deg,#f6b93b,#ffdd59);
+  color:#111;
+  box-shadow:0 10px 40px rgba(246,185,59,0.25);
+}
+
+.primary:hover{
+  transform:translateY(-3px);
+}
+
+.secondary{
+  background:rgba(255,255,255,0.05);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(10px);
+}
+
+.secondary:hover{
+  background:rgba(255,255,255,0.08);
+}
+
+/* =========================
+RIGHT SIDE
+========================= */
+
+.right{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.glass{
+  width:500px;
+  height:500px;
+
+  border-radius:40px;
+
+  position:relative;
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.02)
+  );
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(25px);
+
+  overflow:hidden;
+
+  box-shadow:
+  0 30px 80px rgba(0,0,0,0.5),
+  inset 0 0 50px rgba(255,255,255,0.02);
+
+  animation:float 8s ease-in-out infinite;
+}
+
+@keyframes float{
+  50%{
+    transform:translateY(-10px);
+  }
+}
+
+/* =========================
+WAVE
+========================= */
+
+.wave{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.wave svg{
+  width:80%;
+  opacity:0.95;
+  filter:drop-shadow(0 0 15px rgba(246,185,59,0.5));
+}
+
+/* =========================
+FOOTER
+========================= */
+
+.footer{
+  position:absolute;
+  bottom:35px;
+  left:50%;
+  transform:translateX(-50%);
+
+  z-index:20;
+
+  color:rgba(255,255,255,0.5);
   font-size:13px;
 }
 
-footer{
-  margin-top:30px;
-  font-size:13px;
-  color:var(--muted);
+.footer a{
+  color:#f6b93b;
+  text-decoration:none;
 }
 
-a{color:var(--accent);text-decoration:none;}
+/* =========================
+ANIMATION
+========================= */
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:980px){
+
+  body{
+    overflow:auto;
+  }
+
+  .wrapper{
+    height:auto;
+    min-height:100vh;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .buttons{
+    justify-content:center;
+  }
+
+  h1{
+    font-size:52px;
+  }
+
+  .glass{
+    width:100%;
+    max-width:420px;
+    height:420px;
+  }
+
+  p{
+    margin-inline:auto;
+  }
+}
 
 </style>
 </head>
 
 <body>
 
-<div class="light-rays"></div>
+<div class="bg"></div>
 <div class="fog"></div>
+<div class="glow"></div>
+<div class="noise"></div>
+
 <canvas id="rain"></canvas>
 
-<!-- GRASS -->
-<svg class="grass" viewBox="0 0 1200 200">
-  <path id="grassPath"
-    d="M0,200 C200,140 400,180 600,150 C800,120 1000,170 1200,140 L1200,200 Z"
-    fill="#6fbf73"/>
-</svg>
-
 <!-- AUDIO -->
-<audio id="jungleAudio" loop>
+<audio id="ambientAudio" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5f6b5f1b3f.mp3?filename=jungle-night-ambience-110624.mp3" type="audio/mpeg">
 </audio>
 
-<!-- UI -->
-<div class="container">
-  <h1>Website Under Maintenance</h1>
-  <p>We’re upgrading the system. It will be back shortly.</p>
+<div class="wrapper">
 
-  <div class="status">
-    <span class="dot"></span> System Updating...
+  <div class="hero">
+
+    <!-- LEFT -->
+    <div class="left">
+
+      <div class="badge">
+        <span class="pulse"></span>
+        SYSTEM STATUS — UPDATING
+      </div>
+
+      <h1>
+        Your Digital <br>
+        <span class="gradient">Experience</span><br>
+        Is Evolving
+      </h1>
+
+      <p>
+        We are upgrading the platform with a new immersive experience,
+        improved infrastructure, and advanced performance optimization.
+        The website will return shortly.
+      </p>
+
+      <div class="buttons">
+
+        <button class="btn primary">
+          System Updating
+        </button>
+
+        <button class="btn secondary" id="soundBtn">
+          🔊 Ambient Sound
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+      <div class="glass">
+
+        <div class="wave">
+
+          <svg viewBox="0 0 500 500" fill="none">
+
+            <path d="
+            M250 70
+            C320 90 380 150 390 240
+            C400 340 330 420 240 430
+            C150 440 90 380 80 290
+            C70 190 120 110 250 70Z"
+            stroke="#f6b93b"
+            stroke-width="3"/>
+
+            <path d="
+            M250 100
+            C300 120 350 170 355 240
+            C360 320 310 380 240 390
+            C170 400 120 350 110 280
+            C100 210 130 130 250 100Z"
+            stroke="#f6b93b"
+            stroke-width="3"/>
+
+            <path d="
+            M250 140
+            C290 150 320 190 325 240
+            C330 300 295 345 240 350
+            C185 355 145 320 140 270
+            C135 220 160 160 250 140Z"
+            stroke="#f6b93b"
+            stroke-width="3"/>
+
+            <circle
+              cx="250"
+              cy="250"
+              r="8"
+              fill="#f6b93b"
+            />
+
+          </svg>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <button id="soundToggle">🔇 Play Sound</button>
+</div>
 
-  <footer>
-    © <span id="year"></span> abmsaifullah.me <br>
-    <a href="https://www.instagram.com/abm_saifullah_/" target="_blank">Instagram</a>
-  </footer>
+<div class="footer">
+  © <span id="year"></span> abmsaifullah.me —
+  <a href="https://instagram.com/abm_saifullah_" target="_blank">
+    Instagram
+  </a>
 </div>
 
 <script>
-/* YEAR */
-document.getElementById('year').textContent = new Date().getFullYear();
 
-/* RAIN */
+/* =========================
+YEAR
+========================= */
+
+document.getElementById('year').textContent =
+new Date().getFullYear();
+
+/* =========================
+RAIN
+========================= */
+
 const canvas = document.getElementById('rain');
 const ctx = canvas.getContext('2d');
+
 let w,h;
 
 function resize(){
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
 }
+
 resize();
 window.addEventListener('resize', resize);
 
-let drops=[];
-for(let i=0;i<80;i++){
-  drops.push({
+const rainDrops = [];
+
+for(let i=0;i<180;i++){
+
+  rainDrops.push({
     x:Math.random()*w,
     y:Math.random()*h,
     l:Math.random()*20+10,
-    ys:Math.random()*10+10
+    xs:-2,
+    ys:Math.random()*15+15
   });
+
 }
 
-function draw(){
+function drawRain(){
+
   ctx.clearRect(0,0,w,h);
-  ctx.strokeStyle="rgba(180,220,255,0.5)";
-  for(let d of drops){
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1;
+
+  for(const d of rainDrops){
+
     ctx.beginPath();
+
     ctx.moveTo(d.x,d.y);
-    ctx.lineTo(d.x,d.y+d.l);
+    ctx.lineTo(d.x+d.xs,d.y+d.l);
+
     ctx.stroke();
+
   }
+
 }
 
-function update(){
-  for(let d of drops){
-    d.y+=d.ys;
-    if(d.y>h){
-      d.y=-20;
-      d.x=Math.random()*w;
+function moveRain(){
+
+  for(const d of rainDrops){
+
+    d.x += d.xs;
+    d.y += d.ys;
+
+    if(d.y > h){
+
+      d.y = -20;
+      d.x = Math.random()*w;
+
     }
+
   }
+
 }
 
-function rain(){
-  draw();
-  update();
-  requestAnimationFrame(rain);
+function animateRain(){
+
+  drawRain();
+  moveRain();
+
+  requestAnimationFrame(animateRain);
+
 }
-rain();
 
-/* GRASS */
-const grass = document.getElementById('grassPath');
-let t=0;
+animateRain();
 
-function animateGrass(){
-  t+=0.01;
-  let wv=Math.sin(t)*15;
+/* =========================
+AUDIO
+========================= */
 
-  grass.setAttribute("d",
-    `M0,200 C200,${140+wv} 400,${180-wv} 600,${150+wv}
-     C800,${120-wv} 1000,${170+wv} 1200,${140-wv} L1200,200 Z`
-  );
+const audio = document.getElementById('ambientAudio');
+const btn = document.getElementById('soundBtn');
 
-  requestAnimationFrame(animateGrass);
-}
-animateGrass();
+btn.addEventListener('click',()=>{
 
-/* AUDIO CONTROL */
-const audio = document.getElementById('jungleAudio');
-const btn = document.getElementById('soundToggle');
-
-btn.addEventListener('click', ()=>{
   if(audio.paused){
-    audio.volume = 0.4;
+
+    audio.volume = 0.35;
+
     audio.play();
-    btn.innerText = "🔊 Sound On";
-  } else {
+
+    btn.innerHTML = '🔈 Sound Enabled';
+
+  }else{
+
     audio.pause();
-    btn.innerText = "🔇 Muted";
+
+    btn.innerHTML = '🔊 Ambient Sound';
+
   }
+
 });
 
-/* AUTOPLAY ON FIRST CLICK */
-document.addEventListener('click', ()=>{
+/* =========================
+AUTO PLAY FIRST CLICK
+========================= */
+
+document.addEventListener('click',()=>{
+
   if(audio.paused){
-    audio.volume = 0.4;
+
+    audio.volume = 0.35;
+
     audio.play().catch(()=>{});
-    btn.innerText = "🔊 Sound On";
+
   }
+
 },{once:true});
+
 </script>
 
 </body>
