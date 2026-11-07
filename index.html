@@ -1,438 +1,1187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ABM Saifullah — AI & n8n Automation</title>
-<meta name="description" content="ABM Saifullah builds AI agents and n8n automation systems that run businesses on autopilot.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23000%22/><circle cx=%2250%22 cy=%2250%22 r=%2214%22 fill=%22%23E8AA3E%22/></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #0A0A0A;
-    --line: #212121;
-    --ink: #F2F0EC;
-    --ink-dim: #837F78;
-    --accent: #E8AA3E;
-    --red: #E8433E;
-    --serif: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
-    --mono: 'IBM Plex Mono', ui-monospace, monospace;
-    box-sizing: border-box;
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  html{ scroll-behavior: smooth; height: 100%; }
-  *,*::before,*::after{ box-sizing: border-box; }
-  body{
-    margin:0; background: var(--bg); color: var(--ink);
-    font-family: var(--serif); min-height: 100%;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-  @media (prefers-color-scheme: light){
-    :root:not([data-theme="dark"]){ --bg:#0A0A0A; --line:#212121; --ink:#F2F0EC; --ink-dim:#837F78; }
-  }
-  body.lock{ overflow: hidden; }
-  img{max-width:100%;}
-  a{ color: inherit; }
-  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 28px; }
-  ::selection{ background: var(--accent); color: #0A0A0A; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABM Saifullah — Automation Specialist</title>
+  <meta name="description" content="ABM Saifullah — Automation Specialist. Designing automated smart farming systems, n8n workflow architectures, and generative AI video media.">
 
-  /* ---------- Preloader ---------- */
-  #loader{
-    position: fixed; inset: 0; z-index: 999; background: var(--bg);
-    display:flex; align-items:center; justify-content:center; flex-direction: column;
-    transition: opacity .6s ease, visibility .6s ease;
-  }
-  #loader.done{ opacity: 0; visibility: hidden; pointer-events: none; }
-  .ldr-mark{ display:flex; font-family: var(--mono); font-weight: 500; font-size: 15px;
-    letter-spacing: .04em; }
-  .ldr-mark span{ display:inline-block; opacity: 0; transform: translateY(6px);
-    animation: ldrIn .35s cubic-bezier(.19,1,.22,1) forwards; }
-  .ldr-mark span.red{ color: var(--red); }
-  .ldr-mark span.wht{ color: var(--ink-dim); }
-  .ldr-mark span:nth-child(1){ animation-delay: .02s; }
-  .ldr-mark span:nth-child(2){ animation-delay: .07s; }
-  .ldr-mark span:nth-child(3){ animation-delay: .12s; }
-  .ldr-mark span:nth-child(4){ animation-delay: .17s; }
-  .ldr-mark span:nth-child(5){ animation-delay: .22s; }
-  @keyframes ldrIn{ to{ opacity:1; transform: translateY(0); } }
-  .ldr-rule{ width: 28px; height: 1.5px; background: var(--line); margin: 14px auto 0; position: relative; overflow: hidden; border-radius: 2px; }
-  .ldr-rule::after{ content:''; position:absolute; inset:0; background: var(--accent); transform: translateX(-100%);
-    animation: ldrRule .7s ease-in-out .25s infinite; }
-  @keyframes ldrRule{ 0%{ transform: translateX(-100%);} 50%{ transform: translateX(0);} 100%{ transform: translateX(100%);} }
+  <!-- Luxury Typography: Cormorant Garamond (Editorial Serif) + Plus Jakarta Sans + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Italiana&display=swap" rel="stylesheet">
 
-  /* ---------- Reveal-on-scroll ---------- */
-  .rv{ opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
-  .rv.in{ opacity: 1; transform: translateY(0); }
-  @media (prefers-reduced-motion: reduce){ .rv{ opacity:1; transform:none; transition:none; } }
+  <style>
+    :root {
+      --bg: #070707;
+      --bg-surface: #0e0e0e;
+      --bg-surface-elevated: #141414;
+      --border: rgba(255, 255, 255, 0.09);
+      --border-subtle: rgba(255, 255, 255, 0.04);
+      --border-highlight: rgba(255, 255, 255, 0.35);
+      
+      --text-main: #f5f5f2;
+      --text-muted: #8c8c87;
+      --text-dim: #4e4e4a;
+      
+      --silver: #e2e2dc;
+      --gold-accent: #c5a059; /* subtle understated brass/luxury touch */
+      
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-display: 'Italiana', 'Cormorant Garamond', serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
 
-  /* ---------- Nav ---------- */
-  header{
-    position: sticky; top: 0; z-index: 50;
-    padding-top: env(safe-area-inset-top, 0px);
-    background: rgba(10,10,10,.85); backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  nav{ display:flex; align-items:center; justify-content:space-between; padding: 18px 0; }
-  .logo{ font-weight: 800; font-size: 17px; letter-spacing: -0.02em; text-decoration:none; display:flex; align-items:center; gap:9px;}
-  .logo-dot{ width:8px; height:8px; border-radius:50%; background: var(--accent); flex:none; }
-  @media (prefers-reduced-motion: no-preference){ .logo-dot{ animation: pulse 2.6s ease-in-out infinite; } }
-  .navlinks{ display:flex; gap: 32px; list-style:none; margin:0; padding:0; }
-  .navlinks a, nav .btn{ text-decoration:none; color: var(--ink-dim); font-size: 14px; transition: color .18s ease; }
-  .navlinks a:hover{ color: var(--ink); }
-  @media (max-width: 720px){ .navlinks{ display:none; } }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  section, .hero{ scroll-margin-top: 84px; }
+    html {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      cursor: default;
+    }
 
-  /* ---------- Hero ---------- */
-  .hero{ padding: 80px 0 60px; position: relative; }
-  .hero-grid{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
-  @media (max-width: 860px){ .hero-grid{ grid-template-columns: 1fr; } }
-  .eyebrow{ font-family: var(--mono); font-size: 12.5px; color: var(--accent); margin: 0 0 16px;
-    opacity:0; animation: rise .6s ease forwards; animation-delay: .1s; }
-  h1.headline{
-    font-size: clamp(36px, 6vw, 60px); line-height: 1.03; font-weight: 800;
-    letter-spacing: -0.03em; margin: 0 0 20px; max-width: 12ch;
-  }
-  h1.headline span{ display:block; overflow:hidden; }
-  h1.headline b{ display:block; font-weight:800; opacity:0; transform: translateY(100%); animation: rise .7s cubic-bezier(.19,1,.22,1) forwards; }
-  .sub{ font-size: 17px; line-height: 1.55; color: var(--ink-dim); max-width: 38ch; margin: 0 0 30px;
-    opacity:0; animation: rise .6s ease forwards; animation-delay: .55s; }
-  .cta-row{ display:flex; gap: 14px; flex-wrap: wrap; opacity:0; animation: rise .6s ease forwards; animation-delay: .68s; }
-  @keyframes rise{ to{ opacity:1; transform: translateY(0); } from{ transform: translateY(14px); } }
-  @media (prefers-reduced-motion: reduce){
-    .eyebrow,.sub,.cta-row,h1.headline b{ animation:none !important; opacity:1 !important; transform:none !important; }
-  }
+    body {
+      min-height: 100vh;
+      line-height: 1.7;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-  .btn{
-    display:inline-flex; align-items:center; gap:8px; padding: 13px 22px; border-radius: 8px;
-    font-size: 14px; font-weight: 600; text-decoration:none; border: 1px solid transparent;
-    transition: transform .15s ease, background .15s ease, border-color .15s ease;
-    cursor: pointer; position: relative; z-index: 5;
-  }
-  .btn-primary{ background: var(--accent); color: #0A0A0A; }
-  .btn-primary:hover{ transform: translateY(-2px); background: #f0b953; }
-  .btn-ghost{ border-color: var(--line); color: var(--ink); }
-  .btn-ghost:hover{ border-color: #444; transform: translateY(-2px); }
+    /* Tactile Luxury Film Grain Texture */
+    .film-grain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
 
-  .node-art{ position:relative; }
-  .node-art svg{ width:100%; height:auto; display:block; }
+    /* Custom Luxury Trailing Cursor (Desktop) */
+    .custom-cursor {
+      position: fixed;
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s;
+      mix-blend-mode: difference;
+    }
 
-  /* ---------- Section shared ---------- */
-  section{ padding: 68px 0; border-top: 1px solid var(--line); }
-  .section-head{ display:flex; justify-content:space-between; align-items: flex-end; gap: 24px; margin-bottom: 38px; flex-wrap: wrap; }
-  .section-num{ font-family: var(--mono); font-size: 12.5px; color: var(--ink-dim); }
-  h2{ font-size: clamp(24px, 3.2vw, 32px); letter-spacing:-0.02em; margin: 6px 0 0; font-weight: 700; max-width: 20ch; }
+    .custom-cursor-dot {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: #ffffff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+    }
 
-  /* ---------- About ---------- */
-  .about-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-  @media (max-width: 780px){ .about-grid{ grid-template-columns: 1fr; gap: 30px; } }
-  .about-grid p{ color: var(--ink-dim); line-height: 1.65; font-size: 15.5px; margin: 0; }
-  .about-grid strong{ color: var(--ink); font-weight: 600; }
-  .stat-list{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-  .stat-list li{ border-top: 1px solid var(--line); padding-top: 12px; }
-  .stat-num{ font-size: 26px; font-weight: 800; letter-spacing:-0.02em; color: var(--accent); }
-  .stat-label{ color: var(--ink-dim); font-size: 13px; margin-top: 4px; }
+    @media (max-width: 900px) {
+      .custom-cursor, .custom-cursor-dot { display: none; }
+    }
 
-  /* ---------- Services ---------- */
-  .svc-row{
-    display:grid; grid-template-columns: 1.6fr 2fr; gap: 20px; align-items: center;
-    padding: 26px 0; border-top: 1px solid var(--line);
-    position: relative; transition: padding-left .3s ease;
-  }
-  .svc-row:last-child{ border-bottom: 1px solid var(--line); }
-  .svc-row:hover{ padding-left: 10px; }
-  .svc-row:hover .svc-title{ color: var(--accent); }
-  @media (max-width: 780px){ .svc-row{ grid-template-columns: 1fr; gap: 8px; } }
-  .svc-title{ font-size: 19px; font-weight: 700; letter-spacing: -0.01em; transition: color .3s ease; }
-  .svc-desc{ color: var(--ink-dim); font-size: 14.5px; line-height: 1.5; }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 2.25rem;
+    }
 
-  /* ---------- Process ---------- */
-  .process{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  @media (max-width: 780px){ .process{ grid-template-columns: 1fr 1fr; } }
-  .p-step{ background: var(--bg); padding: 24px 20px; transition: background .3s ease; }
-  .p-step:hover{ background: #111; }
-  .p-index{ font-family: var(--mono); color: var(--accent); font-size: 12.5px; }
-  .p-title{ font-weight: 700; font-size: 15px; margin: 12px 0 0; }
+    /* Luxury Header */
+    .header {
+      padding: 2.5rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
 
-  /* ---------- Tools ---------- */
-  .tool-cloud{ display:flex; flex-wrap: wrap; gap: 9px; }
-  .tool-pill{
-    font-family: var(--mono); font-size: 12.5px; padding: 7px 13px; border: 1px solid var(--line);
-    border-radius: 999px; color: var(--ink-dim); transition: border-color .2s ease, color .2s ease;
-  }
-  .tool-pill:hover{ border-color: var(--accent); color: var(--ink); }
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
 
-  /* ---------- Contact ---------- */
-  .contact-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap: 36px; align-items: end; }
-  @media (max-width: 780px){ .contact-grid{ grid-template-columns: 1fr; } }
-  .contact-links{ display:flex; flex-direction: column; }
-  .contact-link{
-    display:flex; justify-content: space-between; align-items:center; text-decoration:none;
-    padding: 15px 0; border-top: 1px solid var(--line); color: var(--ink);
-    transition: gap .25s ease, color .25s ease;
-  }
-  .contact-link:last-child{ border-bottom: 1px solid var(--line); }
-  .contact-link .label{ font-size: 14.5px; }
-  .contact-link .val{ font-family: var(--mono); font-size: 12.5px; color: var(--ink-dim); transition: transform .25s ease; }
-  .contact-link:hover .val{ transform: translateX(4px); color: var(--accent); }
+    .brand-monogram {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border-radius: 2px;
+    }
 
-  footer{ padding: 26px 0 40px; display:flex; justify-content:space-between; color: var(--ink-dim); font-size: 12.5px; flex-wrap: wrap; gap: 10px; }
+    .brand-text h1 {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
 
-  @media (prefers-reduced-motion: no-preference){
-    .draw{ stroke-dasharray: 400; stroke-dashoffset: 400; animation: dashdraw 1.6s ease forwards; }
-    .pulse-dot{ animation: pulse 2.6s ease-in-out infinite; }
-    @keyframes dashdraw{ to{ stroke-dashoffset: 0; } }
-    @keyframes pulse{ 0%,100%{ opacity: .35; } 50%{ opacity: 1; } }
-  }
-</style>
+    .brand-role {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .header-center-info {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 8px #ffffff;
+      animation: pulse-dot 2.5s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.85); }
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .header-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+      letter-spacing: 0.03em;
+    }
+
+    .header-nav a:hover {
+      color: var(--text-main);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 6.5rem 0 5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .hero-pretitle {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .pretitle-line {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-headline em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: #ffffff;
+    }
+
+    .hero-lead {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 2.75rem;
+    }
+
+    .hero-lead strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .hero-footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .quick-channels {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+    }
+
+    .fancy-link {
+      color: var(--text-main);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.25s ease;
+    }
+
+    .fancy-link:hover {
+      border-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .hero-signature {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Section Styling */
+    .section {
+      padding: 6rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .roman-numeral {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-top: 0.5rem;
+      font-weight: 300;
+      max-width: 640px;
+    }
+
+    /* Fancy Luxury Interactive Switcher (The 3 Disciplines) */
+    .luxury-switcher {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+      overflow-x: auto;
+    }
+
+    .switch-tab {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .switch-tab:hover {
+      color: var(--text-main);
+    }
+
+    .switch-tab.active {
+      color: var(--text-main);
+      border-bottom-color: #ffffff;
+    }
+
+    .discipline-panel {
+      display: none;
+      animation: luxuryFade 0.4s ease-out;
+    }
+
+    .discipline-panel.active {
+      display: block;
+    }
+
+    @keyframes luxuryFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .discipline-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .discipline-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .discipline-prose p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .discipline-prose strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* Luxury Monolithic Showcase Card */
+    .monolith-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .monolith-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 1.5rem;
+    }
+
+    .monolith-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    .monolith-status {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .monolith-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .monolith-table tr {
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .monolith-table td {
+      padding: 0.85rem 0;
+      vertical-align: top;
+    }
+
+    .monolith-table td:first-child {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      width: 32%;
+    }
+
+    .monolith-table td:last-child {
+      color: var(--text-main);
+      font-weight: 400;
+    }
+
+    /* Live Telemetry Instrument (Fancy Smart Farming Element) */
+    .instrument-panel {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-subtle);
+      border-radius: 3px;
+    }
+
+    .instrument-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      text-align: center;
+    }
+
+    .inst-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: block;
+    }
+
+    .inst-value {
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #ffffff;
+      margin: 0.2rem 0;
+    }
+
+    .inst-note {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* The Philosophy of Automation */
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
+      margin-top: 2rem;
+    }
+
+    .philosophy-card {
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      padding: 2rem 1.75rem;
+      border-radius: 3px;
+      transition: all 0.25s ease;
+    }
+
+    .philosophy-card:hover {
+      border-color: var(--border-highlight);
+      transform: translateY(-2px);
+    }
+
+    .philo-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .philo-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .philo-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* Toolkit Strip */
+    .toolkit-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.5rem;
+    }
+
+    .tool-pill {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-main);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.85rem;
+      border-radius: 2px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Luxury Contact Section */
+    .contact-section {
+      padding: 7rem 0 4rem;
+    }
+
+    .contact-hero-statement {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.75rem;
+    }
+
+    .contact-intro {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 3.25rem;
+    }
+
+    .contact-table-wrap {
+      max-width: 580px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg-surface);
+      overflow: hidden;
+    }
+
+    .contact-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+      text-decoration: none;
+      color: var(--text-main);
+      transition: background 0.2s ease;
+    }
+
+    .contact-entry:last-child {
+      border-bottom: none;
+    }
+
+    .contact-entry:hover {
+      background: var(--bg-surface-elevated);
+    }
+
+    .entry-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.2rem;
+    }
+
+    .entry-val {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .action-badge {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.8rem;
+      border-radius: 2px;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .action-badge:hover {
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+
+    /* Toast Notification */
+    #luxury-toast {
+      position: fixed;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      background: #ffffff;
+      color: #000000;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.75rem 1.35rem;
+      border-radius: 2px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      z-index: 10000;
+    }
+
+    #luxury-toast.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 4.5rem 0 2rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--text-main);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container { padding: 0 1.25rem; }
+      .header-nav, .header-center-info { display: none; }
+      .hero { padding: 4.5rem 0 3rem; }
+      .section { padding: 4rem 0; }
+      .hero-headline { font-size: 2.5rem; }
+      .contact-entry { padding: 1.2rem; }
+      .monolith-card { padding: 1.25rem; }
+      .instrument-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-<body class="lock">
+<body>
 
-<div id="loader" aria-hidden="true">
-  <div class="ldr-mark">
-    <span class="red">X</span><span class="wht">u</span><span class="red">H</span><span class="wht">u</span><span class="wht">m</span>
-  </div>
-  <div class="ldr-rule"></div>
-</div>
+  <!-- Tactile Luxury Grain Layer -->
+  <div class="film-grain"></div>
 
-<header>
-  <div class="wrap">
-    <nav>
-      <a class="logo" href="#top"><span class="logo-dot"></span>ABM Saifullah</a>
-      <ul class="navlinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#stack">Stack</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  <!-- Custom Trailing Dot & Ring Cursor -->
+  <div class="custom-cursor" id="cursor-ring"></div>
+  <div class="custom-cursor-dot" id="cursor-dot"></div>
 
-<main id="top">
-  <section class="hero" style="border-top:none;">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">AI Automation · n8n</p>
-        <h1 class="headline">
-          <span><b>Automations</b></span>
-          <span><b style="animation-delay:.28s">that run</b></span>
-          <span><b style="animation-delay:.42s">your business.</b></span>
-        </h1>
-        <p class="sub">AI agents and n8n workflows that take the repetitive work off your plate — quietly, in the background.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#contact" data-scroll>Start a project</a>
-          <a class="btn btn-ghost" href="#services" data-scroll>What I build</a>
+  <div class="container">
+    
+    <!-- Luxury Header -->
+    <header class="header">
+      <a href="#" class="brand-mark">
+        <div class="brand-monogram">AS</div>
+        <div class="brand-text">
+          <h1>ABM Saifullah</h1>
+          <div class="brand-role">Automation Specialist</div>
         </div>
-      </div>
-      <div class="node-art" aria-hidden="true">
-        <svg viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="#2B2B2B" stroke-width="1.5" fill="none">
-            <path id="p1" class="draw" d="M60,80 C130,80 130,160 200,160" />
-            <path id="p2" class="draw" d="M60,200 C130,200 130,160 200,160" style="animation-delay:.15s" />
-            <path id="p3" class="draw" d="M200,160 C270,160 270,90 340,90" style="animation-delay:.3s" />
-            <path id="p4" class="draw" d="M200,160 C270,160 270,230 340,230" style="animation-delay:.45s" />
-            <path id="p5" class="draw" d="M200,160 C260,160 260,290 320,290" style="animation-delay:.6s" />
-          </g>
-          <g>
-            <circle class="pulse-dot" cx="60" cy="80" r="6" fill="#0A0A0A" stroke="#3a3a3a" stroke-width="1.5"/>
-            <circle class="pulse-dot" cx="60" cy="200" r="6" fill="#0A0A0A" stroke="#3a3a3a" stroke-width="1.5" style="animation-delay:.4s"/>
-            <circle class="pulse-dot" cx="200" cy="160" r="15" fill="#E8AA3E" opacity=".9"/>
-            <circle cx="200" cy="160" r="15" fill="none" stroke="#E8AA3E" stroke-width="1.5"/>
-            <circle class="pulse-dot" cx="340" cy="90" r="6" fill="#0A0A0A" stroke="#3a3a3a" stroke-width="1.5" style="animation-delay:.8s"/>
-            <circle class="pulse-dot" cx="340" cy="230" r="6" fill="#0A0A0A" stroke="#3a3a3a" stroke-width="1.5" style="animation-delay:1.2s"/>
-            <circle class="pulse-dot" cx="320" cy="290" r="6" fill="#0A0A0A" stroke="#3a3a3a" stroke-width="1.5" style="animation-delay:1.6s"/>
-          </g>
-          <!-- traveling data packets -->
-          <g fill="#E8AA3E">
-            <circle r="3"><animateMotion dur="2.4s" begin="1.8s" repeatCount="indefinite" path="M60,80 C130,80 130,160 200,160" /></circle>
-            <circle r="3"><animateMotion dur="2.4s" begin="2.6s" repeatCount="indefinite" path="M60,200 C130,200 130,160 200,160" /></circle>
-            <circle r="3"><animateMotion dur="2s" begin="1.9s" repeatCount="indefinite" path="M200,160 C270,160 270,90 340,90" /></circle>
-            <circle r="3"><animateMotion dur="2.2s" begin="2.3s" repeatCount="indefinite" path="M200,160 C270,160 270,230 340,230" /></circle>
-            <circle r="3"><animateMotion dur="2.6s" begin="2.9s" repeatCount="indefinite" path="M200,160 C260,160 260,290 320,290" /></circle>
-          </g>
-          <g font-family="IBM Plex Mono" font-size="10" fill="#6f6d68">
-            <text x="20" y="65">form</text>
-            <text x="18" y="220">crm</text>
-            <text x="176" y="140">agent</text>
-            <text x="348" y="80">slack</text>
-            <text x="348" y="248">sheet</text>
-            <text x="328" y="308">email</text>
-          </g>
-        </svg>
-      </div>
-    </div>
-  </section>
+      </a>
 
-  <section id="about">
-    <div class="wrap">
-      <div class="section-head rv">
-        <div>
-          <span class="section-num">01 — About</span>
-          <h2>Built for how your business actually runs.</h2>
-        </div>
+      <!-- Live Atelier Time in Dhaka -->
+      <div class="header-center-info">
+        <span class="live-dot"></span>
+        <span>Dhaka, BD — <span id="clock-display">00:00:00</span> GMT+6</span>
       </div>
-      <div class="about-grid">
-        <p class="rv"><strong>ABM Saifullah</strong> — AI automation specialist working mainly in <strong>n8n</strong>. I connect the tools you already use into workflows that read data, decide with an LLM, and act — without anyone touching it.</p>
-        <ul class="stat-list rv">
-          <li><div class="stat-num">n8n</div><div class="stat-label">primary engine</div></li>
-          <li><div class="stat-num">24/7</div><div class="stat-label">unattended runs</div></li>
-          <li><div class="stat-num">API-first</div><div class="stat-label">connects anything</div></li>
-          <li><div class="stat-num">1 person</div><div class="stat-label">build to hand-off</div></li>
+
+      <nav>
+        <ul class="header-nav">
+          <li><a href="#work">Disciplines</a></li>
+          <li><a href="#philosophy">Approach</a></li>
+          <li><a href="#toolkit">Tools</a></li>
+          <li><a href="#contact">Inquire ↗</a></li>
         </ul>
-      </div>
-    </div>
-  </section>
+      </nav>
+    </header>
 
-  <section id="services">
-    <div class="wrap">
-      <div class="section-head rv">
-        <div>
-          <span class="section-num">02 — Services</span>
-          <h2>What I build</h2>
+    <main>
+
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-pretitle">
+          <span class="pretitle-line"></span>
+          <span>Automation Specialist • Selected Systems & Practice</span>
         </div>
-      </div>
-      <div class="svc-list">
-        <div class="svc-row rv"><div class="svc-title">n8n workflow automation</div><div class="svc-desc">Lead to CRM, form to sheet, invoice to accounting — connected end to end.</div></div>
-        <div class="svc-row rv"><div class="svc-title">AI agents &amp; assistants</div><div class="svc-desc">LLM agents that read, classify, and reply — plugged into your channels.</div></div>
-        <div class="svc-row rv"><div class="svc-title">Chatbots &amp; support</div><div class="svc-desc">WhatsApp and web bots that answer from your own data, and escalate when needed.</div></div>
-        <div class="svc-row rv"><div class="svc-title">Data &amp; reporting</div><div class="svc-desc">Scheduled pipelines that pull, clean, and deliver a report to your inbox.</div></div>
-        <div class="svc-row rv"><div class="svc-title">Custom integrations</div><div class="svc-desc">If two tools don't talk, I build the bridge between them.</div></div>
-      </div>
-    </div>
-  </section>
 
-  <section id="process">
-    <div class="wrap">
-      <div class="section-head rv">
-        <div>
-          <span class="section-num">03 — Process</span>
-          <h2>How a project moves</h2>
+        <h2 class="hero-headline">
+          Designing systems that think, connect, and run <em>unattended</em>.
+        </h2>
+
+        <div class="hero-lead">
+          <p>
+            I am Saifullah — an <strong>Automation Specialist</strong>. I do not view automation as merely scripting tasks; I treat it as designing living architecture.
+          </p>
+          <p style="margin-top: 1.25rem;">
+            My days are spent orchestrating <strong>AI-based automated smart farming systems</strong> that read sensor physics and regulate greenhouse irrigation, engineering <strong>production n8n workflow pipelines</strong> that eliminate manual enterprise operations, and exploring the frontiers of <strong>generative AI video</strong>.
+          </p>
         </div>
-      </div>
-      <div class="process rv">
-        <div class="p-step"><div class="p-index">01</div><div class="p-title">Map the process</div></div>
-        <div class="p-step"><div class="p-index">02</div><div class="p-title">Design the workflow</div></div>
-        <div class="p-step"><div class="p-index">03</div><div class="p-title">Build &amp; test</div></div>
-        <div class="p-step"><div class="p-index">04</div><div class="p-title">Ship &amp; hand off</div></div>
-      </div>
-    </div>
-  </section>
 
-  <section id="stack">
-    <div class="wrap">
-      <div class="section-head rv">
-        <div>
-          <span class="section-num">04 — Stack</span>
-          <h2>Tools I work in</h2>
+        <div class="hero-footer-bar">
+          <div class="quick-channels">
+            <a href="mailto:abmsaifullah34@gmail.com" class="fancy-link">abmsaifullah34@gmail.com</a>
+            <span style="color: var(--text-dim);">/</span>
+            <a href="https://instagram.com/abm_saifullah_" target="_blank" rel="noopener noreferrer" class="fancy-link">@abm_saifullah_</a>
+          </div>
+
+          <div class="hero-signature">ABM Saifullah</div>
         </div>
-      </div>
-      <div class="tool-cloud rv">
-        <span class="tool-pill">n8n</span>
-        <span class="tool-pill">OpenAI</span>
-        <span class="tool-pill">Claude</span>
-        <span class="tool-pill">Gemini</span>
-        <span class="tool-pill">Make.com</span>
-        <span class="tool-pill">Zapier</span>
-        <span class="tool-pill">Airtable</span>
-        <span class="tool-pill">Google Workspace</span>
-        <span class="tool-pill">WhatsApp API</span>
-        <span class="tool-pill">Telegram</span>
-        <span class="tool-pill">Supabase</span>
-        <span class="tool-pill">Postgres</span>
-        <span class="tool-pill">Node.js</span>
-        <span class="tool-pill">Python</span>
-        <span class="tool-pill">Docker</span>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <section class="contact" id="contact">
-    <div class="wrap contact-grid">
-      <div class="rv">
-        <span class="section-num">05 — Contact</span>
-        <h2>Have a process to automate?</h2>
-      </div>
-      <div class="contact-links rv">
-        <a class="contact-link" href="mailto:abmsaifullah34@gmail.com">
-          <span class="label">Email</span><span class="val">abmsaifullah34@gmail.com</span>
-        </a>
-        <a class="contact-link" href="https://instagram.com/abm_saifullah_" target="_blank" rel="noopener">
-          <span class="label">Instagram</span><span class="val">@abm_saifullah_</span>
-        </a>
-      </div>
-    </div>
-  </section>
-</main>
+      <!-- Section I: The Three Disciplines (Interactive Switcher) -->
+      <section id="work" class="section">
+        <div class="section-header">
+          <span class="roman-numeral">I • Core Practice</span>
+          <h2 class="section-title">The Three Arenas of Automation</h2>
+          <p class="section-subtitle">A curated exploration into physical agritech automation, enterprise workflow orchestrations, and synthetic generative media.</p>
+        </div>
 
-<footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
-    <span>© <span id="yr"></span> abmsaifullah.me</span>
-    <span>Built &amp; automated by ABM Saifullah</span>
+        <!-- Luxury Switcher Tabs -->
+        <div class="luxury-switcher">
+          <button class="switch-tab active" data-target="tab-agri">01 / Smart Farming Automation</button>
+          <button class="switch-tab" data-target="tab-n8n">02 / n8n Workflow Pipelines</button>
+          <button class="switch-tab" data-target="tab-video">03 / Generative AI Video</button>
+        </div>
+
+        <!-- TAB 1: SMART FARMING AUTOMATION -->
+        <div id="tab-agri" class="discipline-panel active">
+          <div class="discipline-grid">
+            <div class="discipline-prose">
+              <p>
+                Agriculture has historically relied on manual labor, guesswork, and delayed human reactions. As an <strong>automation specialist</strong>, my objective is to make biological systems self-monitoring and self-regulating.
+              </p>
+              <p>
+                In our automated smart farming installations, microcontrollers stream soil moisture and Vapor Pressure Deficit (VPD) metrics over MQTT. Computer vision algorithms continuously audit foliage colorimetry to detect stress before it is visible to the naked human eye.
+              </p>
+              <p>
+                When a moisture deficit is detected, solenoid valves actuate autonomously without requiring human intervention. It is precise, water-conserving, and operates 24/7.
+              </p>
+            </div>
+
+            <!-- Monolith Card for Smart Farming -->
+            <div class="monolith-card">
+              <div class="monolith-card-header">
+                <span class="monolith-tag">Smart Agriculture Rig</span>
+                <span class="monolith-status"><span class="live-dot"></span> Active Telemetry</span>
+              </div>
+
+              <table class="monolith-table">
+                <tbody>
+                  <tr>
+                    <td>IoT Nodes</td>
+                    <td>ESP32 & MicroPython edge transmitters running low-power loops.</td>
+                  </tr>
+                  <tr>
+                    <td>Vision Model</td>
+                    <td>Computer vision foliage health & pest detection routines.</td>
+                  </tr>
+                  <tr>
+                    <td>Protocol</td>
+                    <td>MQTT payload broker pushing telemetry to local cloud relays.</td>
+                  </tr>
+                  <tr>
+                    <td>Actuation</td>
+                    <td>Calibrated relay circuits for threshold-governed solenoid irrigation.</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Live fluctuating instrument panel -->
+              <div class="instrument-panel">
+                <div class="instrument-grid">
+                  <div>
+                    <span class="inst-label">Soil Moisture</span>
+                    <div class="inst-value" id="disp-moist">42.8%</div>
+                    <span class="inst-note">Target: 40-45%</span>
+                  </div>
+                  <div>
+                    <span class="inst-label">Ambient Temp</span>
+                    <div class="inst-value" id="disp-temp">24.6°C</div>
+                    <span class="inst-note">Greenhouse 01</span>
+                  </div>
+                  <div>
+                    <span class="inst-label">Valve State</span>
+                    <div class="inst-value" id="disp-valve" style="color: #ffffff;">STANDBY</div>
+                    <span class="inst-note">Auto-Governed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: n8n WORKFLOW PIPELINES -->
+        <div id="tab-n8n" class="discipline-panel">
+          <div class="discipline-grid">
+            <div class="discipline-prose">
+              <p>
+                Repetitive human data transfer is a symptom of fragmented architecture. When staff spend hours shuttling data between customer forms, CRMs, spreadsheets, and messaging apps, business velocity stalls.
+              </p>
+              <p>
+                I build self-hosted <strong>n8n workflow pipelines</strong> that operate as the silent, unattended central nervous system for businesses. These pipelines ingest webhooks, consult Large Language Models (Claude 3.5 Sonnet, GPT-4o) to evaluate context and classify intent, and synchronize records across PostgreSQL and Supabase.
+              </p>
+              <p>
+                The result: automated WhatsApp and Telegram client updates, zero manual data entry, and fail-safe error monitoring deployed cleanly via Docker.
+              </p>
+            </div>
+
+            <!-- Monolith Card for n8n -->
+            <div class="monolith-card">
+              <div class="monolith-card-header">
+                <span class="monolith-tag">Pipeline Blueprint</span>
+                <span class="monolith-status">Unattended Node Stack</span>
+              </div>
+
+              <table class="monolith-table">
+                <tbody>
+                  <tr>
+                    <td>Orchestrator</td>
+                    <td>Self-hosted n8n in containerized Docker environments.</td>
+                  </tr>
+                  <tr>
+                    <td>Reasoning</td>
+                    <td>Claude 3.5 Sonnet & GPT-4o for entity extraction & classification.</td>
+                  </tr>
+                  <tr>
+                    <td>Data Store</td>
+                    <td>Supabase & PostgreSQL for relational sync and vector storage.</td>
+                  </tr>
+                  <tr>
+                    <td>Client Nodes</td>
+                    <td>WhatsApp Business Cloud API, Telegram bot dispatchers, Webhooks.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: GENERATIVE AI VIDEO -->
+        <div id="tab-video" class="discipline-panel">
+          <div class="discipline-grid">
+            <div class="discipline-prose">
+              <p>
+                Beyond operational logic and sensors lies synthetic creative technology. Generative video is redefining cinematography, enabling single creators to conceptualize and direct cinematic motion sequences directly through code and prompt engineering.
+              </p>
+              <p>
+                I experiment with generative video toolchains — guiding diffusion physics with Runway Gen-3 and Kling AI, generating consistent visual keyframes with Midjourney and Flux, and designing spatial voice tracks using ElevenLabs.
+              </p>
+              <p>
+                It is an ongoing exploration in narrative automation: turning abstract concepts into high-fidelity audiovisual storytelling.
+              </p>
+            </div>
+
+            <!-- Monolith Card for Video -->
+            <div class="monolith-card">
+              <div class="monolith-card-header">
+                <span class="monolith-tag">Generative Suite</span>
+                <span class="monolith-status">Synthetic Direction</span>
+              </div>
+
+              <table class="monolith-table">
+                <tbody>
+                  <tr>
+                    <td>Motion Synthesis</td>
+                    <td>Runway Gen-3 Alpha, Kling AI, Luma Dream Machine.</td>
+                  </tr>
+                  <tr>
+                    <td>Concept Frames</td>
+                    <td>Midjourney v6, Flux.1 for artistic visual direction.</td>
+                  </tr>
+                  <tr>
+                    <td>Neural Voice</td>
+                    <td>ElevenLabs speech cloning and dynamic sonic pacing.</td>
+                  </tr>
+                  <tr>
+                    <td>Pipeline</td>
+                    <td>Automated assembly scripts and timeline formatting.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section II: Philosophy of Automation Specialist -->
+      <section id="philosophy" class="section">
+        <div class="section-header">
+          <span class="roman-numeral">II • Principles</span>
+          <h2 class="section-title">The Automation Creed</h2>
+          <p class="section-subtitle">How I approach building systems, whether for agricultural hardware or business logic.</p>
+        </div>
+
+        <div class="philosophy-grid">
+          <div class="philosophy-card">
+            <span class="philo-num">01 /</span>
+            <h3 class="philo-title">Unattended by Default</h3>
+            <p class="philo-desc">
+              If an automated pipeline requires daily manual intervention to function, it is not an automated system. True automation operates quietly in the background with robust fallback mechanisms.
+            </p>
+          </div>
+
+          <div class="philosophy-card">
+            <span class="philo-num">02 /</span>
+            <h3 class="philo-title">Physical Meets Digital</h3>
+            <p class="philo-desc">
+              Software is most compelling when it touches the real world. Connecting real-world physical soil probes and actuators to cloud telemetry grounds high-level code in tangible physical reality.
+            </p>
+          </div>
+
+          <div class="philosophy-card">
+            <span class="philo-num">03 /</span>
+            <h3 class="philo-title">Human Discretion</h3>
+            <p class="philo-desc">
+              Automation should eliminate drudgery, not human judgment. The goal is to clear away mechanical repetition so humans can spend their attention on creative and strategic decisions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section III: Selected Toolkit -->
+      <section id="toolkit" class="section">
+        <div class="section-header">
+          <span class="roman-numeral">III • Arsenal</span>
+          <h2 class="section-title">Tools & Technologies</h2>
+          <p class="section-subtitle">The hardware, software engines, and models I deploy in production.</p>
+        </div>
+
+        <div class="toolkit-strip">
+          <span class="tool-pill">n8n (Self-Hosted)</span>
+          <span class="tool-pill">Docker & Compose</span>
+          <span class="tool-pill">Claude 3.5 Sonnet</span>
+          <span class="tool-pill">OpenAI GPT-4o</span>
+          <span class="tool-pill">Google Gemini</span>
+          <span class="tool-pill">ESP32 & MicroPython</span>
+          <span class="tool-pill">MQTT Protocols</span>
+          <span class="tool-pill">OpenCV Vision</span>
+          <span class="tool-pill">Supabase</span>
+          <span class="tool-pill">PostgreSQL</span>
+          <span class="tool-pill">Runway Gen-3</span>
+          <span class="tool-pill">Kling AI</span>
+          <span class="tool-pill">ElevenLabs</span>
+          <span class="tool-pill">WhatsApp Cloud API</span>
+          <span class="tool-pill">Linux VPS</span>
+        </div>
+      </section>
+
+      <!-- Section IV: Conversation / Contact -->
+      <section id="contact" class="contact-section">
+        <div class="section-header">
+          <span class="roman-numeral">IV • Direct Inquiries</span>
+          <h2 class="contact-hero-statement">Let's discuss automated systems.</h2>
+          <p class="contact-intro">
+            Whether you are looking to automate an agricultural environment, design unattended n8n business pipelines, or explore creative AI video — write to me directly. No agency middlemen, no automated responses.
+          </p>
+        </div>
+
+        <div class="contact-table-wrap">
+          <!-- Gmail -->
+          <div class="contact-entry">
+            <div>
+              <div class="entry-label">Direct Email</div>
+              <div class="entry-val">abmsaifullah34@gmail.com</div>
+            </div>
+            <button id="copy-btn" class="action-badge">Copy Address</button>
+          </div>
+
+          <!-- Direct mailto -->
+          <a href="mailto:abmsaifullah34@gmail.com" class="contact-entry">
+            <div>
+              <div class="entry-label">Mail Client</div>
+              <div class="entry-val">Compose in Default App ↗</div>
+            </div>
+            <span class="action-badge">Launch</span>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://instagram.com/abm_saifullah_" target="_blank" rel="noopener noreferrer" class="contact-entry">
+            <div>
+              <div class="entry-label">Instagram</div>
+              <div class="entry-val">@abm_saifullah_</div>
+            </div>
+            <span class="action-badge">Follow ↗</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Luxury Footer -->
+    <footer class="footer">
+      <div>ABM Saifullah • Automation Specialist • GitHub Pages</div>
+      <div>
+        <a href="mailto:abmsaifullah34@gmail.com">abmsaifullah34@gmail.com</a>
+      </div>
+    </footer>
+
   </div>
-</footer>
 
-<script>
-  document.getElementById('yr').textContent = new Date().getFullYear();
+  <!-- Luxury Notification Toast -->
+  <div id="luxury-toast">Copied to clipboard ✓</div>
 
-  // ---- Preloader: always resolves, multiple redundant triggers ----
-  (function(){
-    var loader = document.getElementById('loader');
-    var unlocked = false;
-    function unlock(){
-      if(unlocked) return;
-      unlocked = true;
-      loader.classList.add('done');
-      document.body.classList.remove('lock');
+  <!-- Interactive Scripts -->
+  <script>
+    // --- 1. Custom Smooth Trailing Cursor ---
+    const cursorRing = document.getElementById('cursor-ring');
+    const cursorDot = document.getElementById('cursor-dot');
+
+    if (window.innerWidth > 900) {
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = `${mouseX}px`;
+        cursorDot.style.top = `${mouseY}px`;
+      });
+
+      function animateCursor() {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        cursorRing.style.left = `${ringX}px`;
+        cursorRing.style.top = `${ringY}px`;
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      document.querySelectorAll('a, button, .switch-tab, .contact-entry').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursorRing.style.width = '44px';
+          cursorRing.style.height = '44px';
+          cursorRing.style.borderColor = '#ffffff';
+        });
+        el.addEventListener('mouseleave', () => {
+          cursorRing.style.width = '28px';
+          cursorRing.style.height = '28px';
+          cursorRing.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+        });
+      });
     }
-    if(document.readyState === 'complete'){
-      setTimeout(unlock, 450);
-    } else {
-      window.addEventListener('load', function(){ setTimeout(unlock, 300); });
-    }
-    document.addEventListener('DOMContentLoaded', function(){ setTimeout(unlock, 900); });
-    setTimeout(unlock, 1300); // hard safety cap
-  })();
 
-  // ---- Smooth-scroll nav/CTA buttons explicitly (robust to browser quirks) ----
-  (function(){
-    var links = document.querySelectorAll('a[href^="#"]');
-    links.forEach(function(link){
-      link.addEventListener('click', function(e){
-        var id = this.getAttribute('href');
-        if(!id || id.length < 2) return;
-        var target = document.querySelector(id);
-        if(target){
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          history.pushState(null, '', id);
-        }
+    // --- 2. Live Clock in Dhaka (GMT+6) ---
+    function updateDhakaClock() {
+      const now = new Date();
+      // Format time in Dhaka (Asia/Dhaka)
+      const options = { timeZone: 'Asia/Dhaka', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      const timeStr = now.toLocaleTimeString('en-US', options);
+      const clockEl = document.getElementById('clock-display');
+      if (clockEl) clockEl.textContent = timeStr;
+    }
+    updateDhakaClock();
+    setInterval(updateDhakaClock, 1000);
+
+    // --- 3. Interactive Discipline Tabs ---
+    const tabs = document.querySelectorAll('.switch-tab');
+    const panels = document.querySelectorAll('.discipline-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        tab.classList.add('active');
+        const targetId = tab.dataset.target;
+        const targetPanel = document.getElementById(targetId);
+        if (targetPanel) targetPanel.classList.add('active');
       });
     });
-  })();
 
-  // ---- Reveal on scroll ----
-  (function(){
-    var els = document.querySelectorAll('.rv');
-    if(!('IntersectionObserver' in window)){
-      els.forEach(function(el){ el.classList.add('in'); });
-      return;
-    }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
+    // --- 4. Simulated Smart Farm Telemetry Sensor Data ---
+    const dispMoist = document.getElementById('disp-moist');
+    const dispTemp = document.getElementById('disp-temp');
+    const dispValve = document.getElementById('disp-valve');
+
+    if (dispMoist && dispTemp && dispValve) {
+      setInterval(() => {
+        const m = (41.6 + Math.random() * 2.2).toFixed(1);
+        const t = (24.3 + Math.random() * 0.8).toFixed(1);
+        dispMoist.textContent = `${m}%`;
+        dispTemp.textContent = `${t}°C`;
+
+        if (parseFloat(m) < 42.0) {
+          dispValve.textContent = 'ACTUATING';
+          dispValve.style.color = '#c5a059';
+        } else {
+          dispValve.textContent = 'STANDBY';
+          dispValve.style.color = '#ffffff';
         }
+      }, 3200);
+    }
+
+    // --- 5. Clipboard Copy with Luxury Toast ---
+    const copyBtn = document.getElementById('copy-btn');
+    const toast = document.getElementById('luxury-toast');
+
+    if (copyBtn && toast) {
+      copyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = 'abmsaifullah34@gmail.com';
+        navigator.clipboard.writeText(email).then(() => {
+          copyBtn.textContent = 'Copied ✓';
+          toast.classList.add('active');
+          setTimeout(() => {
+            copyBtn.textContent = 'Copy Address';
+            toast.classList.remove('active');
+          }, 2400);
+        }).catch(() => {
+          alert('Email: ' + email);
+        });
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(function(el){ io.observe(el); });
-  })();
-</script>
+    }
+  </script>
 </body>
 </html>
